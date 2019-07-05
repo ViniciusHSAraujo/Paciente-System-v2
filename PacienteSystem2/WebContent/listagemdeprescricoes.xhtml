@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina"></ui:define>
+	<ui:define name="tituloPrincipal"></ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao">
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<b:dataTable value="#{prescricaoBean.listarPrescricoes()}" var="prescricao">
+			<b:dataTableColumn label="Ações" >
+				    <b:commandButton value="Excluir" action="#{prescricaoBean.excluirPrescricao(prescricao)}" ajax="true" update="@form" look="danger"/>
+			</b:dataTableColumn>
+			<b:dataTableColumn value="#{prescricao.paciente.nomeDoPaciente}" label="Nome do Paciente" />
+			<b:dataTableColumn value="#{prescricao.medicamento.nome}" label="Nome do Paciente" />
+			<b:dataTableColumn value="#{prescricao.dataInicio.toLocaleString()}" label="Data de Início" />		
+			<b:dataTableColumn value="#{prescricao.dataFinal.toLocaleString()}" label="Data de Término" />	
+			<b:dataTableColumn value="#{prescricao.frequencia}" label="Frequência" />	
+				
+		</b:dataTable>
+
+	</ui:define>
+
+</ui:composition>
+</html>

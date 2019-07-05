@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">Cadastro de Prescrições</ui:define>
+	<ui:define name="tituloPrincipal">Cadastro de Prescrições</ui:define>
+	<ui:define name="tituloSecundario">Preencha os dados para o cadastramento de uma nova prescrição no sistema</ui:define>
+
+	<ui:define name="botoesAcao">
+		<b:commandButton value="Cadastrar"
+			action="#{prescricaoBean.cadastrarPrescricao()}" ajax="true"
+			update="@form" look="success" />
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<b:selectOneMenu id="paciente"
+			value="#{prescricaoBean.prescricao.paciente}"
+			converter="omnifaces.SelectItemsIndexConverter" label="Paciente:"
+			required="true">
+			<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+			<f:selectItems value="#{pacienteBean.pacientes}" var="paciente"
+				itemLabel="#{paciente.nomeDoPaciente}" itemValue="#{paciente}" />
+		</b:selectOneMenu>
+
+		<b:selectOneMenu id="medicamento"
+			value="#{prescricaoBean.prescricao.medicamento}"
+			converter="omnifaces.SelectItemsIndexConverter" label="Medicamento:"
+			required="true">
+			<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+			<f:selectItems value="#{medicamentoBean.medicamentos}" var="medicamento"
+				itemLabel="#{medicamento.nome}" itemValue="#{medicamento}" />
+		</b:selectOneMenu>
+
+		<b:datepicker id="datainicio" label="Data da Início]"
+			value="#{prescricaoBean.prescricao.dataInicio}" mode="popup-icon"
+			placeholder="Clique para escolher uma data" required="true" />
+
+		<b:datepicker id="dataInternamento" label="Data da Término"
+			value="#{prescricaoBean.prescricao.dataFinal}" mode="popup-icon"
+			placeholder="Clique para escolher uma data" required="true" />
+
+		<b:inputText id="frequencia"
+			value="#{prescricaoBean.prescricao.frequencia}"
+			label="Frequência:" required="true" />
+
+
+
+	</ui:define>
+
+</ui:composition>
+</html>
